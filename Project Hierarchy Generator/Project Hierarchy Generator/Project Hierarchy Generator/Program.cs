@@ -33,7 +33,8 @@ namespace ProjectHierarchyGenerator
 
         void CheckFolderPath()
         {
-            Console.WriteLine("Your Folder path is : " + folderPath);
+            Console.WriteLine("Your Folder path is : ");
+            Console.WriteLine(folderPath);
             Console.WriteLine("Is it the good folder path Yes or No :");
             string input = Console.ReadLine();
             if (input == "Yes" || input == "yes")
