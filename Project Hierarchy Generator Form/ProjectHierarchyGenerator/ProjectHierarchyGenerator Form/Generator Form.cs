@@ -10,6 +10,8 @@ namespace ProjectHierarchyGenerator_Form
         private string m_FolderPath = string.Empty;
         private string m_TemplatePath = string.Empty;
 
+        private bool m_UseTemplate = false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -41,7 +43,7 @@ namespace ProjectHierarchyGenerator_Form
             if (result == DialogResult.OK)
             {
                 m_TemplatePath = fileDialog.FileName;
-                ExempleFolderPath_TextBox.Text = m_TemplatePath;
+                TemplatePath_TextBox.Text = m_TemplatePath;
             }
         }
 
@@ -58,9 +60,15 @@ namespace ProjectHierarchyGenerator_Form
         }
 
         //TEMPLATE FILE TEXT BOX
-        private void ExempleFolderPath_TextBox_TextChanged(object sender, EventArgs e)
+        private void TemplatePath_TextBox_TextChanged(object sender, EventArgs e)
         {
-            CheckFolderPath(ExempleFolderPath_TextBox.Text);
+            if (m_UseTemplate) CheckFolderPath(TemplatePath_TextBox.Text);
+        }
+
+        //USE TEMPLATE CHECKBOX
+        private void UseTemplate_CheckedChanged(object sender, EventArgs e)
+        {
+            m_UseTemplate = !m_UseTemplate;
         }
 
         //CHECK FOLDER PATH
@@ -113,5 +121,6 @@ namespace ProjectHierarchyGenerator_Form
         {
 
         }
+
     }
 }

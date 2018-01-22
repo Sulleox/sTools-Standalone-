@@ -32,15 +32,17 @@
             this.FolderPath_TextB = new System.Windows.Forms.TextBox();
             this.Browse_Button = new System.Windows.Forms.Button();
             this.ExampleFolder_Label = new System.Windows.Forms.Label();
-            this.ExempleFolderPath_TextBox = new System.Windows.Forms.TextBox();
+            this.TemplatePath_TextBox = new System.Windows.Forms.TextBox();
             this.ExempleFolder_Browse_Button = new System.Windows.Forms.Button();
             this.GenerateButton = new System.Windows.Forms.Button();
+            this.TemplateCheckBox = new System.Windows.Forms.CheckBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // FolderPath_Label
             // 
             this.FolderPath_Label.AutoSize = true;
-            this.FolderPath_Label.Location = new System.Drawing.Point(12, 20);
+            this.FolderPath_Label.Location = new System.Drawing.Point(9, 16);
             this.FolderPath_Label.Name = "FolderPath_Label";
             this.FolderPath_Label.Size = new System.Drawing.Size(103, 13);
             this.FolderPath_Label.TabIndex = 0;
@@ -48,15 +50,15 @@
             // 
             // FolderPath_TextB
             // 
-            this.FolderPath_TextB.Location = new System.Drawing.Point(137, 13);
+            this.FolderPath_TextB.Location = new System.Drawing.Point(12, 32);
             this.FolderPath_TextB.Name = "FolderPath_TextB";
-            this.FolderPath_TextB.Size = new System.Drawing.Size(261, 20);
+            this.FolderPath_TextB.Size = new System.Drawing.Size(179, 20);
             this.FolderPath_TextB.TabIndex = 1;
             this.FolderPath_TextB.TextChanged += new System.EventHandler(this.FolderPath_TextB_TextChanged);
             // 
             // Browse_Button
             // 
-            this.Browse_Button.Location = new System.Drawing.Point(405, 9);
+            this.Browse_Button.Location = new System.Drawing.Point(197, 30);
             this.Browse_Button.Name = "Browse_Button";
             this.Browse_Button.Size = new System.Drawing.Size(22, 23);
             this.Browse_Button.TabIndex = 2;
@@ -67,23 +69,23 @@
             // ExampleFolder_Label
             // 
             this.ExampleFolder_Label.AutoSize = true;
-            this.ExampleFolder_Label.Location = new System.Drawing.Point(12, 54);
+            this.ExampleFolder_Label.Location = new System.Drawing.Point(245, 16);
             this.ExampleFolder_Label.Name = "ExampleFolder_Label";
             this.ExampleFolder_Label.Size = new System.Drawing.Size(82, 13);
             this.ExampleFolder_Label.TabIndex = 3;
             this.ExampleFolder_Label.Text = "Template Path :";
             // 
-            // ExempleFolderPath_TextBox
+            // TemplatePath_TextBox
             // 
-            this.ExempleFolderPath_TextBox.Location = new System.Drawing.Point(137, 47);
-            this.ExempleFolderPath_TextBox.Name = "ExempleFolderPath_TextBox";
-            this.ExempleFolderPath_TextBox.Size = new System.Drawing.Size(261, 20);
-            this.ExempleFolderPath_TextBox.TabIndex = 4;
-            this.ExempleFolderPath_TextBox.TextChanged += new System.EventHandler(this.ExempleFolderPath_TextBox_TextChanged);
+            this.TemplatePath_TextBox.Location = new System.Drawing.Point(248, 31);
+            this.TemplatePath_TextBox.Name = "TemplatePath_TextBox";
+            this.TemplatePath_TextBox.Size = new System.Drawing.Size(179, 20);
+            this.TemplatePath_TextBox.TabIndex = 4;
+            this.TemplatePath_TextBox.TextChanged += new System.EventHandler(this.TemplatePath_TextBox_TextChanged);
             // 
             // ExempleFolder_Browse_Button
             // 
-            this.ExempleFolder_Browse_Button.Location = new System.Drawing.Point(405, 43);
+            this.ExempleFolder_Browse_Button.Location = new System.Drawing.Point(433, 29);
             this.ExempleFolder_Browse_Button.Name = "ExempleFolder_Browse_Button";
             this.ExempleFolder_Browse_Button.Size = new System.Drawing.Size(22, 23);
             this.ExempleFolder_Browse_Button.TabIndex = 5;
@@ -93,7 +95,7 @@
             // 
             // GenerateButton
             // 
-            this.GenerateButton.Location = new System.Drawing.Point(352, 82);
+            this.GenerateButton.Location = new System.Drawing.Point(12, 276);
             this.GenerateButton.Name = "GenerateButton";
             this.GenerateButton.Size = new System.Drawing.Size(75, 23);
             this.GenerateButton.TabIndex = 6;
@@ -101,12 +103,33 @@
             this.GenerateButton.UseVisualStyleBackColor = true;
             this.GenerateButton.Click += new System.EventHandler(this.GenerateButton_Click);
             // 
+            // TemplateCheckBox
+            // 
+            this.TemplateCheckBox.AutoSize = true;
+            this.TemplateCheckBox.Location = new System.Drawing.Point(248, 57);
+            this.TemplateCheckBox.Name = "TemplateCheckBox";
+            this.TemplateCheckBox.Size = new System.Drawing.Size(92, 17);
+            this.TemplateCheckBox.TabIndex = 7;
+            this.TemplateCheckBox.Text = "Use Template";
+            this.TemplateCheckBox.UseVisualStyleBackColor = true;
+            this.TemplateCheckBox.CheckedChanged += new System.EventHandler(this.UseTemplate_CheckedChanged);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(12, 80);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(442, 190);
+            this.richTextBox1.TabIndex = 8;
+            this.richTextBox1.Text = "";
+            // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(444, 122);
+            this.ClientSize = new System.Drawing.Size(466, 306);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.TemplateCheckBox);
             this.Controls.Add(this.GenerateButton);
             this.Controls.Add(this.ExempleFolder_Browse_Button);
-            this.Controls.Add(this.ExempleFolderPath_TextBox);
+            this.Controls.Add(this.TemplatePath_TextBox);
             this.Controls.Add(this.ExampleFolder_Label);
             this.Controls.Add(this.Browse_Button);
             this.Controls.Add(this.FolderPath_TextB);
@@ -125,9 +148,11 @@
         private System.Windows.Forms.TextBox FolderPath_TextB;
         private System.Windows.Forms.Button Browse_Button;
         private System.Windows.Forms.Label ExampleFolder_Label;
-        private System.Windows.Forms.TextBox ExempleFolderPath_TextBox;
+        private System.Windows.Forms.TextBox TemplatePath_TextBox;
         private System.Windows.Forms.Button ExempleFolder_Browse_Button;
         private System.Windows.Forms.Button GenerateButton;
+        private System.Windows.Forms.CheckBox TemplateCheckBox;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
