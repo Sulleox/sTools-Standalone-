@@ -36,7 +36,7 @@
             this.ExempleFolder_Browse_Button = new System.Windows.Forms.Button();
             this.GenerateButton = new System.Windows.Forms.Button();
             this.TemplateCheckBox = new System.Windows.Forms.CheckBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.HierarchyTemplate_RichTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // FolderPath_Label
@@ -114,18 +114,18 @@
             this.TemplateCheckBox.UseVisualStyleBackColor = true;
             this.TemplateCheckBox.CheckedChanged += new System.EventHandler(this.UseTemplate_CheckedChanged);
             // 
-            // richTextBox1
+            // HierarchyTemplate_RichTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 80);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(442, 190);
-            this.richTextBox1.TabIndex = 8;
-            this.richTextBox1.Text = "";
+            this.HierarchyTemplate_RichTextBox.Location = new System.Drawing.Point(12, 80);
+            this.HierarchyTemplate_RichTextBox.Name = "HierarchyTemplate_RichTextBox";
+            this.HierarchyTemplate_RichTextBox.Size = new System.Drawing.Size(442, 190);
+            this.HierarchyTemplate_RichTextBox.TabIndex = 8;
+            this.HierarchyTemplate_RichTextBox.Text = "";
             // 
             // MainForm
             // 
             this.ClientSize = new System.Drawing.Size(466, 306);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.HierarchyTemplate_RichTextBox);
             this.Controls.Add(this.TemplateCheckBox);
             this.Controls.Add(this.GenerateButton);
             this.Controls.Add(this.ExempleFolder_Browse_Button);
@@ -152,7 +152,7 @@
         private System.Windows.Forms.Button ExempleFolder_Browse_Button;
         private System.Windows.Forms.Button GenerateButton;
         private System.Windows.Forms.CheckBox TemplateCheckBox;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox HierarchyTemplate_RichTextBox;
     }
 }
 

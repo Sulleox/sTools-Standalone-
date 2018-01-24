@@ -19,7 +19,7 @@ namespace ProjectHierarchyGenerator_Form
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            HierarchyTemplate_RichTextBox.AcceptsTab = true;
         }
 
         //BROWSE FOLDER CLICK
@@ -119,8 +119,65 @@ namespace ProjectHierarchyGenerator_Form
         //GENERATE PROJECT HIERARCHY
         private void GenerateFolders()
         {
+            if (m_FolderPath != string.Empty)
+            {
+                if (m_UseTemplate)
+                {
+                    //Open file
+                }
+                else
+                {
+                    int lastTabNumber = 0;
+                    string lastFolderCreatePath = m_FolderPath;
+                    string currentFolderName = string.Empty;
 
+                    string[] foldersNames = HierarchyTemplate_RichTextBox.Text.Split("\n\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    foreach (String folderName in foldersNames)
+                    {
+                        int tabNumber = 0;
+                        for (int i = 0; i < folderName.Length; i++)
+                        {
+                            if (folderName[i] == '\t')
+                            {
+                                tabNumber++;
+                                if (tabNumber > 0) currentFolderName = folderName.Remove(0, tabNumber);
+                                else currentFolderName = folderName;
+                            }
+                        }
+
+                        if (tabNumber == 0)
+                        {
+                            //Créer dans le dossier racine
+                            string newFolderPath = Path.Combine(m_FolderPath, currentFolderName);
+                            Directory.CreateDirectory(newFolderPath);
+                            lastFolderCreatePath = newFolderPath;
+                        }
+                        else if (tabNumber > lastTabNumber)
+                        {
+                            //Enfant du dernier dossier créer
+                            string newFolderPath = Path.Combine(lastFolderCreatePath, currentFolderName);
+                            Directory.CreateDirectory(newFolderPath);
+                            lastFolderCreatePath = newFolderPath;
+                        }
+                        else if (tabNumber <= lastTabNumber)
+                        {
+                            //Créer dans un dossier enfant du racine
+                            string newFolderPath = lastFolderCreatePath;
+                            for (int i = 0; i < tabNumber; i++)
+                            {
+                                int pathCutter = lastFolderCreatePath.LastIndexOf("\\");
+                                newFolderPath = lastFolderCreatePath.Remove(pathCutter);
+                            }
+
+                            newFolderPath = Path.Combine(newFolderPath, currentFolderName);
+                            Directory.CreateDirectory(newFolderPath);
+                            lastFolderCreatePath = newFolderPath;
+                        }
+
+                        lastTabNumber = tabNumber;
+                    }
+                }
+            }
         }
-
     }
 }
