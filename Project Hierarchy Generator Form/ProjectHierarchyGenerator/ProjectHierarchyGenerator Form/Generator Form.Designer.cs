@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.FolderPath_Label = new System.Windows.Forms.Label();
             this.FolderPath_TextB = new System.Windows.Forms.TextBox();
             this.Browse_Button = new System.Windows.Forms.Button();
@@ -124,7 +125,8 @@
             // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(466, 306);
+            this.BackColor = System.Drawing.Color.LightGray;
+            this.ClientSize = new System.Drawing.Size(464, 307);
             this.Controls.Add(this.HierarchyTemplate_RichTextBox);
             this.Controls.Add(this.TemplateCheckBox);
             this.Controls.Add(this.GenerateButton);
@@ -134,6 +136,7 @@
             this.Controls.Add(this.Browse_Button);
             this.Controls.Add(this.FolderPath_TextB);
             this.Controls.Add(this.FolderPath_Label);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Project Hierarchy Generator";
             this.Load += new System.EventHandler(this.MainForm_Load);
