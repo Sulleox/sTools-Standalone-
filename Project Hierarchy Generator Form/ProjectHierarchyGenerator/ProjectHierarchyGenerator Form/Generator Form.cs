@@ -50,7 +50,7 @@ namespace ProjectHierarchyGenerator_Form
         //GENERATE BUTTON CLICK
         private void GenerateButton_Click(object sender, EventArgs e)
         {
-            GenerateFolders();
+            PreGenerateFolder();
         }
 
         //FOLDER PATH TEXT BOX
@@ -102,7 +102,7 @@ namespace ProjectHierarchyGenerator_Form
                     {
                         File.Delete(filePath);
                         m_FolderPath = folderPath;
-                        GenerateFolders();
+                        PreGenerateFolder();
                     }
                 }
                 else
@@ -117,76 +117,82 @@ namespace ProjectHierarchyGenerator_Form
         }
 
         //GENERATE PROJECT HIERARCHY
-        private void GenerateFolders()
+        private void PreGenerateFolder()
         {
             if (m_FolderPath != string.Empty)
             {
                 if (m_UseTemplate)
                 {
-                    //TO FINISH
-                    //File.OpenRead(m_TemplatePath);
+                    string[] foldersNames = File.ReadAllLines(m_TemplatePath);
+                    GenerateFolder(foldersNames);
                 }
                 else
                 {
-                    int lastTabNumber = 0;
-                    string lastFolderCreatePath = m_FolderPath;
 
                     string[] foldersNames = HierarchyTemplate_RichTextBox.Text.Split("\n\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                    foreach (String folderName in foldersNames)
+                    GenerateFolder(foldersNames);
+                }
+            }
+        }
+
+        public void GenerateFolder(string[] foldersNames)
+        {
+            int lastTabNumber = 0;
+            string lastFolderCreatePath = m_FolderPath;
+
+            foreach (String folderName in foldersNames)
+            {
+                int tabNumber = 0;
+                string currentFolderName = folderName;
+
+                for (int i = 0; i < folderName.Length; i++)
+                {
+                    if (folderName[i] == '\t')
                     {
-                        int tabNumber = 0;
-                        string currentFolderName = folderName;
-
-                        for (int i = 0; i < folderName.Length; i++)
-                        {
-                            if (folderName[i] == '\t')
-                            {
-                                tabNumber++;
-                                if (tabNumber > 0) currentFolderName = folderName.Remove(0, tabNumber);
-                            }
-                        }
-
-                        if (tabNumber == 0)
-                        {
-                            //Créer dans le dossier racine
-                            string newFolderPath = Path.Combine(m_FolderPath, currentFolderName);
-                            Directory.CreateDirectory(newFolderPath);
-                            lastFolderCreatePath = newFolderPath;
-                        }
-                        else if (tabNumber > lastTabNumber)
-                        {
-                            //Enfant du dernier dossier créer
-                            string newFolderPath = Path.Combine(lastFolderCreatePath, currentFolderName);
-                            Directory.CreateDirectory(newFolderPath);
-                            lastFolderCreatePath = newFolderPath;
-                        }
-                        else if (tabNumber < lastTabNumber)
-                        {
-                            //Créer dans un dossier enfant du racine
-                            string newFolderPath = lastFolderCreatePath;
-                            for (int i = 0; i < ((lastTabNumber + 1) - tabNumber); i++)
-                            {
-                                int lastIndex = newFolderPath.LastIndexOf('\\');
-                                Console.WriteLine(lastIndex);
-                                newFolderPath = newFolderPath.Remove(lastIndex);
-                                Console.WriteLine(newFolderPath);
-                            }
-                            newFolderPath = Path.Combine(newFolderPath, currentFolderName);
-                            Directory.CreateDirectory(newFolderPath);
-                            lastFolderCreatePath = newFolderPath;
-                        }
-                        else if (tabNumber == lastTabNumber)
-                        {
-                            string newFolderPath = lastFolderCreatePath;
-                            int lastIndex = newFolderPath.LastIndexOf('\\');
-                            newFolderPath = Path.Combine(newFolderPath.Remove(lastIndex), currentFolderName);
-                            Directory.CreateDirectory(newFolderPath);
-                            lastFolderCreatePath = newFolderPath;
-                        }
-
-                        lastTabNumber = tabNumber;
+                        tabNumber++;
+                        if (tabNumber > 0) currentFolderName = folderName.Remove(0, tabNumber);
                     }
                 }
+
+                if (tabNumber == 0)
+                {
+                    //Créer dans le dossier racine
+                    string newFolderPath = Path.Combine(m_FolderPath, currentFolderName);
+                    Directory.CreateDirectory(newFolderPath);
+                    lastFolderCreatePath = newFolderPath;
+                }
+                else if (tabNumber > lastTabNumber)
+                {
+                    //Enfant du dernier dossier créer
+                    string newFolderPath = Path.Combine(lastFolderCreatePath, currentFolderName);
+                    Directory.CreateDirectory(newFolderPath);
+                    lastFolderCreatePath = newFolderPath;
+                }
+                else if (tabNumber < lastTabNumber)
+                {
+                    //Créer dans un dossier enfant du racine
+                    string newFolderPath = lastFolderCreatePath;
+                    for (int i = 0; i < ((lastTabNumber + 1) - tabNumber); i++)
+                    {
+                        int lastIndex = newFolderPath.LastIndexOf('\\');
+                        Console.WriteLine(lastIndex);
+                        newFolderPath = newFolderPath.Remove(lastIndex);
+                        Console.WriteLine(newFolderPath);
+                    }
+                    newFolderPath = Path.Combine(newFolderPath, currentFolderName);
+                    Directory.CreateDirectory(newFolderPath);
+                    lastFolderCreatePath = newFolderPath;
+                }
+                else if (tabNumber == lastTabNumber)
+                {
+                    string newFolderPath = lastFolderCreatePath;
+                    int lastIndex = newFolderPath.LastIndexOf('\\');
+                    newFolderPath = Path.Combine(newFolderPath.Remove(lastIndex), currentFolderName);
+                    Directory.CreateDirectory(newFolderPath);
+                    lastFolderCreatePath = newFolderPath;
+                }
+
+                lastTabNumber = tabNumber;
             }
         }
     }
