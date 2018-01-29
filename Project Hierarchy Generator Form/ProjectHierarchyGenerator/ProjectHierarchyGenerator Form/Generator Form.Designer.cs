@@ -117,11 +117,13 @@
             // 
             // HierarchyTemplate_RichTextBox
             // 
+            this.HierarchyTemplate_RichTextBox.AcceptsTab = true;
             this.HierarchyTemplate_RichTextBox.Location = new System.Drawing.Point(12, 80);
             this.HierarchyTemplate_RichTextBox.Name = "HierarchyTemplate_RichTextBox";
             this.HierarchyTemplate_RichTextBox.Size = new System.Drawing.Size(442, 190);
             this.HierarchyTemplate_RichTextBox.TabIndex = 8;
-            this.HierarchyTemplate_RichTextBox.Text = "";
+            this.HierarchyTemplate_RichTextBox.Text = "Exemple :\n\nMain folder\n\tSubFolder_01\n\tSubFolder_02\nSecondary folder\n\tSubFolder_01" +
+    "\n\tSubFolder_02\n\n\n";
             // 
             // MainForm
             // 

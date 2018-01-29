@@ -19,7 +19,7 @@ namespace ProjectHierarchyGenerator_Form
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            HierarchyTemplate_RichTextBox.AcceptsTab = true;
+
         }
 
         //BROWSE FOLDER CLICK
@@ -123,8 +123,12 @@ namespace ProjectHierarchyGenerator_Form
             {
                 if (m_UseTemplate)
                 {
-                    string[] foldersNames = File.ReadAllLines(m_TemplatePath);
-                    GenerateFolder(foldersNames);
+                    if (m_TemplatePath != string.Empty)
+                    {
+                        string[] foldersNames = File.ReadAllLines(m_TemplatePath);
+                        GenerateFolder(foldersNames);
+                    }
+                    else MessageBox.Show("The template path is empty.", "[ERROR] Template Path");
                 }
                 else
                 {
@@ -133,6 +137,7 @@ namespace ProjectHierarchyGenerator_Form
                     GenerateFolder(foldersNames);
                 }
             }
+            else MessageBox.Show("The folder path is empty.", "[ERROR] Folder Path");
         }
 
         public void GenerateFolder(string[] foldersNames)
